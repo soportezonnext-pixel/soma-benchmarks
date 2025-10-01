@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Benchmark - Clasificación de Emails</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            padding: 30px 0;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-sublabel {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .charts-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .chart-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .errors-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .errors-table th,
+        .errors-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .errors-table th {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+        }
+
+        .errors-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .status-correct {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .status-incorrect {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .text-preview {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+
+        .error-message {
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            padding: 50px;
+            background: rgba(220,53,69,0.2);
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .accuracy-high {
+            color: #28a745;
+        }
+
+        .accuracy-medium {
+            color: #ffc107;
+        }
+
+        .accuracy-low {
+            color: #dc3545;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            background: #e9ecef;
+            color: #495057;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .filter-btn:hover {
+            background: #dee2e6;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active:hover {
+            background: linear-gradient(145deg, #5a6fd8, #6a4190);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dashboard de Benchmark</h1>
+            <p>Análisis de Clasificación de Emails ALTA/BAJA</p>
+        </div>
+
+        <div id="loading" class="loading">
+            Cargando datos del archivo CSV...
+        </div>
+
+        <div id="error" class="error-message hidden">
+            Error al cargar el archivo CSV. Verifica que el archivo 'results.csv' exista en la misma carpeta.
+        </div>
+
+        <div id="dashboard" class="hidden">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCases">-</div>
+                    <div class="stat-label">Total de Casos</div>
+                    <div class="stat-sublabel">Procesados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="accuracy">-</div>
+                    <div class="stat-label">Precisión General</div>
+                    <div class="stat-sublabel">% de aciertos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="correctPredictions">-</div>
+                    <div class="stat-label">Predicciones Correctas</div>
+                    <div class="stat-sublabel">Casos acertados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="incorrectPredictions">-</div>
+                    <div class="stat-label">Predicciones Incorrectas</div>
+                    <div class="stat-sublabel">Casos fallidos</div>
+                </div>
+            </div>
+
+            <div class="charts-section">
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de Resultados</div>
+                    <canvas id="accuracyChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Matriz de Confusión</div>
+                    <canvas id="confusionChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Precisión por Categoría</div>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Distribución Esperada vs Predicha</div>
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <h3>Análisis Detallado de Casos</h3>
+                <div class="filter-section">
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">Todos</button>
+                        <button class="filter-btn" data-filter="incorrect">Solo Incorrectos</button>
+                        <button class="filter-btn" data-filter="correct">Solo Correctos</button>
+                        <button class="filter-btn" data-filter="alta-baja">ALTA/BAJA</button>
+                        <button class="filter-btn" data-filter="no-clasificable">NO CLASIFICABLE</button>
+                    </div>
+                </div>
+                <table class="errors-table" id="casesTable">
+                    <thead>
+                        <tr>
+                            <th>Caso #</th>
+                            <th>Texto (Preview)</th>
+                            <th>Esperado</th>
+                            <th>Predicho</th>
+                            <th>Estado</th>
+                            <th>Timestamp</th>
+                        </tr>
+                    </thead>
+                    <tbody id="casesTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let csvData = [];
+        let filteredData = [];
+        let charts = {};
+
+        // Ruta del archivo CSV - cambia esta ruta según tus necesidades
+        const CSV_FILE_PATH = 'testing_benchmark_results.csv';
+
+        // Cargar automáticamente al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCSVFromPath();
+        });
+
+        function loadCSVFromPath() {
+            fetch(CSV_FILE_PATH)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(csvText => {
+                    Papa.parse(csvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            if (results.errors.length > 0) {
+                                console.error('Errores al parsear CSV:', results.errors);
+                            }
+                            csvData = results.data;
+                            document.getElementById('loading').classList.add('hidden');
+                            initializeDashboard();
+                        },
+                        error: function(error) {
+                            showError('Error al parsear el archivo CSV: ' + error.message);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error al cargar el archivo:', error);
+                    showError('No se pudo cargar el archivo CSV. Verifica que "' + CSV_FILE_PATH + '" exista y sea accesible.');
+                });
+        }
+
+        function showError(message) {
+            document.getElementById('loading').classList.add('hidden');
+            const errorElement = document.getElementById('error');
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        function initializeDashboard() {
+            if (csvData.length === 0) {
+                showError('El archivo CSV está vacío o no tiene datos válidos.');
+                return;
+            }
+            
+            filteredData = csvData.slice();
+            updateStats();
+            createCharts();
+            updateTable();
+            setupFilters();
+            document.getElementById('dashboard').classList.remove('hidden');
+        }
+
+        function updateStats() {
+            const totalCases = filteredData.length;
+            const correctCases = filteredData.filter(row => row.is_correct === 'True').length;
+            const incorrectCases = totalCases - correctCases;
+            const accuracy = totalCases > 0 ? (correctCases / totalCases * 100).toFixed(1) : 0;
+
+            document.getElementById('totalCases').textContent = totalCases;
+            document.getElementById('correctPredictions').textContent = correctCases;
+            document.getElementById('incorrectPredictions').textContent = incorrectCases;
+            
+            const accuracyElement = document.getElementById('accuracy');
+            accuracyElement.textContent = accuracy + '%';
+            
+            // Aplicar color según precisión
+            accuracyElement.className = 'stat-value';
+            if (accuracy >= 80) {
+                accuracyElement.classList.add('accuracy-high');
+            } else if (accuracy >= 60) {
+                accuracyElement.classList.add('accuracy-medium');
+            } else {
+                accuracyElement.classList.add('accuracy-low');
+            }
+        }
+
+        function createCharts() {
+            createAccuracyChart();
+            createConfusionMatrix();
+            createCategoryChart();
+            createDistributionChart();
+        }
+
+        function createAccuracyChart() {
+            const ctx = document.getElementById('accuracyChart').getContext('2d');
+            
+            if (charts.accuracy) {
+                charts.accuracy.destroy();
+            }
+
+            const correctCases = filteredData.filter(row => row.is_correct === 'True').length;
+            const incorrectCases = filteredData.length - correctCases;
+
+            charts.accuracy = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Correctos', 'Incorrectos'],
+                    datasets: [{
+                        data: [correctCases, incorrectCases],
+                        backgroundColor: ['#28a745', '#dc3545'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createConfusionMatrix() {
+            const ctx = document.getElementById('confusionChart').getContext('2d');
+            
+            if (charts.confusion) {
+                charts.confusion.destroy();
+            }
+
+            // Calcular matriz de confusión
+            const matrix = {
+                'ALTA/BAJA → ALTA/BAJA': 0,
+                'ALTA/BAJA → NO CLASIFICABLE': 0,
+                'NO CLASIFICABLE → ALTA/BAJA': 0,
+                'NO CLASIFICABLE → NO CLASIFICABLE': 0
+            };
+
+            filteredData.forEach(row => {
+                const key = `${row.expected_classification} → ${row.predicted_classification}`;
+                if (matrix.hasOwnProperty(key)) {
+                    matrix[key]++;
+                }
+            });
+
+            charts.confusion = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(matrix),
+                    datasets: [{
+                        label: 'Cantidad',
+                        data: Object.values(matrix),
+                        backgroundColor: ['#28a745', '#dc3545', '#dc3545', '#28a745'],
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function createCategoryChart() {
+            const ctx = document.getElementById('categoryChart').getContext('2d');
+            
+            if (charts.category) {
+                charts.category.destroy();
+            }
+
+            // Calcular precisión por categoría
+            const categories = ['ALTA/BAJA', 'NO CLASIFICABLE'];
+            const accuracies = categories.map(category => {
+                const categoryData = filteredData.filter(row => row.expected_classification === category);
+                const correct = categoryData.filter(row => row.is_correct === 'True').length;
+                return categoryData.length > 0 ? (correct / categoryData.length * 100) : 0;
+            });
+
+            charts.category = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        label: 'Precisión (%)',
+                        data: accuracies,
+                        backgroundColor: ['#667eea', '#764ba2'],
+                        borderRadius: 10
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function createDistributionChart() {
+            const ctx = document.getElementById('distributionChart').getContext('2d');
+            
+            if (charts.distribution) {
+                charts.distribution.destroy();
+            }
+
+            // Contar distribuciones
+            const expectedCount = {
+                'ALTA/BAJA': filteredData.filter(row => row.expected_classification === 'ALTA/BAJA').length,
+                'NO CLASIFICABLE': filteredData.filter(row => row.expected_classification === 'NO CLASIFICABLE').length
+            };
+
+            const predictedCount = {
+                'ALTA/BAJA': filteredData.filter(row => row.predicted_classification === 'ALTA/BAJA').length,
+                'NO CLASIFICABLE': filteredData.filter(row => row.predicted_classification === 'NO CLASIFICABLE').length
+            };
+
+            charts.distribution = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['ALTA/BAJA', 'NO CLASIFICABLE'],
+                    datasets: [{
+                        label: 'Esperado',
+                        data: [expectedCount['ALTA/BAJA'], expectedCount['NO CLASIFICABLE']],
+                        backgroundColor: '#667eea',
+                        borderRadius: 5
+                    }, {
+                        label: 'Predicho',
+                        data: [predictedCount['ALTA/BAJA'], predictedCount['NO CLASIFICABLE']],
+                        backgroundColor: '#764ba2',
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTable() {
+            const tableBody = document.getElementById('casesTableBody');
+            tableBody.innerHTML = '';
+
+            filteredData.forEach(row => {
+                const tr = document.createElement('tr');
+                const isCorrect = row.is_correct === 'True';
+                
+                tr.innerHTML = `
+                    <td>${row.case_number || '-'}</td>
+                    <td class="text-preview" title="${row.email_text || ''}">${(row.email_text || '').substring(0, 50)}${(row.email_text || '').length > 50 ? '...' : ''}</td>
+                    <td>${row.expected_classification || '-'}</td>
+                    <td>${row.predicted_classification || '-'}</td>
+                    <td class="${isCorrect ? 'status-correct' : 'status-incorrect'}">
+                        ${isCorrect ? '✅ Correcto' : '❌ Incorrecto'}
+                    </td>
+                    <td>${row.timestamp ? new Date(row.timestamp).toLocaleString() : '-'}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function setupFilters() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Actualizar botones activos
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Aplicar filtro
+                    const filter = this.dataset.filter;
+                    applyFilter(filter);
+                });
+            });
+        }
+
+        function applyFilter(filter) {
+            switch(filter) {
+                case 'all':
+                    filteredData = csvData.slice();
+                    break;
+                case 'correct':
+                    filteredData = csvData.filter(row => row.is_correct === 'True');
+                    break;
+                case 'incorrect':
+                    filteredData = csvData.filter(row => row.is_correct === 'False');
+                    break;
+                case 'alta-baja':
+                    filteredData = csvData.filter(row => row.expected_classification === 'ALTA/BAJA');
+                    break;
+                case 'no-clasificable':
+                    filteredData = csvData.filter(row => row.expected_classification === 'NO CLASIFICABLE');
+                    break;
+                default:
+                    filteredData = csvData.slice();
+            }
+            
+            updateStats();
+            createCharts();
+            updateTable();
+        }
+    </script>
+</body>
+</html>

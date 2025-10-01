@@ -1,0 +1,212 @@
+case_number,email_text,expected_classification,predicted_classification,is_correct,timestamp
+1,���������������������������������������� Este es un email con caracteres Unicode raros: ♠♣♥♦ Contenido: ���ALTA/BAJA��� ����������������������������������������,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:26.828170
+2,"Contenido con caracteres de control:  ALTA/BAJA con [31mcolores[0m",NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:31.010569
+3,��🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯🎯��💀 ALTA/BAJA ��💀💀��🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀��😁😂🤣😃😄😅😆😉😊😋😎😍😘�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:35.724061
+4,Content-Type: text/html; charset=utf-8 <!DOCTYPE html> <html> <body> <p style=font-family: Comic Sans MS>ALTA/BAJA</p> <script>alert(XSS)</script> </body> </html>,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:39.825857
+5,ÿþH e l l o   W o r l dÿþ A�L�T�A�/�B�A�J�A,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:44.025052
+6,,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:48.430260
+7,<html><head><title>Test</head><body><p>ALTA/BAJA<div><span><b>Test</p></span></div></b></body> <script>while(true){alert('infinite loop');}</script> <img src=javascript:alert('xss') />,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:30:51.704612
+8,&lt;![CDATA[ALTA/BAJA]]&gt;&amp;&lt;&gt;&quot;&apos; &#x41;&#x4C;&#x54;&#x41;/&#x42;&#x41;&#x4A;&#x41;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:30:54.884257
+9,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa! (a+)+b (a*)*c ((a+)+)+d ALTA/BAJA está aquí,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:01.123685
+10,((((((((((ALTA/BAJA)))))))))) [[[[[[[ALTA/BAJA]]]]]]] {ALTA/BAJA} <<<<<<<ALTA/BAJA>>>>>>>,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:05.067587
+11,"ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ALTA/BAJA ",NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:08.296221
+12,Content-Type: text/plain ALTA/BAJA parte 1,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:11.476604
+13,<p>ALTA/BAJA parte 2</p> -- SIN CERRAR BOUNDARY,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:14.576934
+14,Este email dice ALTA/BAJA pero en realidad trata sobre: - Facturación - Consultas técnicas   - Soporte al cliente ALTA/BAJA mencionado por error,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:21.844696
+15,A-L-T-A/B-A-J-A A L T A / B A J A АLТА/ВАЈА (caracteres cirílicos que parecen latinos) 4LT4/B4J4 (números por letras),NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:25.516074
+16,ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:29.127204
+17,"ALTA/BAJA  con    diferentes saltos de línea",NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:33.490556
+18,Este es un email con caracteres Unicode raros: ♠♣♥♦ Contenido: ���ALTA/BAJA��� ����������������������������������������,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:36.963131
+19,∑∞≠≈≤≥±∓×÷√∂∆∇∀∃∈∉∋⊆⊇⊂⊃∩∪ ALTA/BAJA con símbolos matemáticos,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:40.084004
+20,αβγδεζηθικλμνξοπρστυφχψω ALTA/BAJA ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:42.809570
+21,█▉▊▋▌▍▎▏▐░▒▓▔▕▖▗▘▙▚▛▜▝▞▟ ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:48.797599
+22,♈♉♊♋♌♍♎♏♐♑♒♓ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:31:51.824118
+23,℀℁ℂ℃℄℅℆ℇ℈℉ℊℋℌℍℎℏ ALTA/BAJA,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:31:57.861249
+24,✁✂✃✄ ✅ ✆✇✈✉ ✊✋✌✍ ✎✏ ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:01.020694
+25,♻♼♽♾ ♿ ⚀⚁⚂⚃⚄⚅ ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:06.057866
+26,①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳ ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:08.735605
+27,⒜⒝⒞⒟⒠⒡⒢⒣⒤⒥⒦⒧⒨⒩⒪⒫⒬⒭⒮⒯⒰⒱⒲⒳⒴⒵,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:11.719283
+28,ⅰⅱⅲⅳⅴⅵⅶⅷⅸⅹⅺⅻ ALTA/BAJA ⅼⅽⅾⅿↀↁↂ,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:16.384459
+29,²³¹⁰⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻ ALTA/BAJA,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:19.200331
+30,℀℁℮℩℮ ALTA/BAJA ℮℩℮ℂℍℕℙℚℝℤℭℌℑℜℨ,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:22.430230
+31,∀∁∂∃∄∅∆∇∈∉∊∋∌∍∎∏∐∑−∓∔⁄∖∗∘∙√∛∜∝∞∟∠∡∢∣∤∥∦∧∨∩∪∫∬∭∮∯∰∱∲∳,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:26.521034
+32,"   ALTA/BAJA ",NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:31.546897
+33, ALTA/BAJA ,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:34.521872
+34,Códigos ANSI para limpiar pantalla ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:39.116775
+35,[32mALTA[33m/[34mBAJA[0m,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:32:42.608074
+36,��😁😂🤣😃😄😅😆😉😊😋😎😍😘🥰😗😙😚 🙂🤗🤔😐😑😶🙄😏😣😥😮🤐😯😪😫🥱�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:48.815143
+37,��🍎🍐🍊🍋🍌🍉🍇🍓🫐🍈🍒🍑🥭🍍🥥🥝🍅🍆🥑🥦🥬🥒🌶🫑🌽🥕 🫒🧄�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:51.821865
+38,��🚕🚙🚌🚎🏎🚓🚑🚒🚐🛻🚚🚛🚜🏍🛵🚲🛴🛹🛼🚁🚟🚠🚡🛶⛵🚤 🛥🛳⛴🚢✈🛩🛫🛬🪂�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:54.766259
+39,⚽🏀🏈⚾🥎🎾🏐🏉🥏🎱🪀🏓🏸🏒🏑🥍🏏🪃🥅⛳🪁🏹🎣🤿🥽🥼🦺👕👖🩱👙👗👘🥻�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:32:57.762385
+40,ubject: A̢ ̞ ̼ ̖ ̺ ̟ ̬ ̪ ̰ ̺ ̳ ̝ ̯ L̠ ̞ ̮ ̜ ̮ ̯ ̦ ̳ T̺ ̫ ̝ ̼ ̪ ̼ ̻ A̢ ̞ ̼ ̖ ̺ ̟ ̬ ̪ /B̺ ̫ ̝ ̼ ̪ ̼ ̻ A̢ ̞ ̼ ̖ ̺ ̟ ̬  J̠ ̞ ̮ ̜ ̮ ̯ ̦  A ̺ ̫ ̝ ̼ ̪ ̼ ̻From: test76@tudominio.com Caracteres con diacríticos combinados ALTA/BAJA,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:00.937273
+41,A⃞L⃞T⃞A⃞/⃞B⃞A⃞J⃞A⃞ ▄▀█ █░░ ▀█▀ ▄▀█   ▄▀█ █▄▄ ▄▀█ ░░█ ▄▀█,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:05.141794
+42,𝔸𝕃𝕋𝔸/𝔹𝔸𝕁𝔸 𝕕𝕠𝕦𝕓𝕝𝕖 𝕤𝕥𝕣𝕦𝕔�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:09.267104
+43,��🧿🪬💫⭐🌟✨🌙🌛🌜🌚🌝🌞☀🌤⛅🌦🌧⛈🌩🌨❄☃⛄🌬💨💧💦☔☂🌊�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:12.129324
+44,ȺŁŦȺ/฿ⱥJⱥ ɆӾŧɇnđɇđ łⱥŧɨn,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:15.071309
+45,ＡＬＴＡ／ＢＡＪＡ ｆｕｌｌｗｉｄｔｈ,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:33:19.062960
+46,αʟтα/вαנα Çүяιℓℓιç,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:22.340426
+47,阿尔塔/巴哈 中文,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:27.052513
+48,ALTA/BAJA en chino simplificado,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:29.905647
+49,��💥💫⭐🌟✨💖💕💓💗💝💘💟☮☯☪🕉☸✡🔯🕎☦⛪🕌🛕🛐⚛ 🉑㊙ ㊗ ��🈳🈚🈺🈶🈹🈲🅰🅱🆎🆑🅾🆘❌⭕🛑⛔�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:32.774430
+50,알타/바하 한국어,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:35.752144
+51,અલ્ટા/બાજા ગુજરાતી,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:40.149816
+52,ಅಲಾ/ಬಾಜಾ ಕನ್ನಡ,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:42.891432
+53,"<html><body>  + '.join([f<p>{i} ALTA/BAJA {i}</p> for i in range(100_000)]) +  </body></html> Subject: ALTA/BAJA JSON masivo From: test110@tudominio.com { data: [  +  join([    {id: {i} content: ALTA/BAJA {i}}} for i in range(100_000)]) + ] } ",NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:48.859106
+54,.,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:53.360974
+55,",",NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:33:59.309524
+56,��🎪🎨🎬🎤🎧🎼🎵🎶🎹🥁🎷🎺🎸🪕🎻🎲🎯🎳🎮🕹🎰🎱🪀🪁🎪🎭 🖼🎨🧵🪡🧶�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:03.915066
+57,+<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000+<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000+<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000 +<<<<<<<<<< * 1000 + ALTA/BAJA + >>>>>>>>>> * 1000,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:07.528151
+58,?SCSU?Q?ALTA/BAJA?= From: test224@tudominio.com ALTA/BAJA en SCSU,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:10.877239
+59,����ALTA/BAJA����,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:13.725279
+60,A�L�T�A�/�B�A�J�A�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:17.222989
+61,ALTA/BAJAþÿ  ,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:20.246382
+62,ï»¿ALTA/BAJAï»¿,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:23.107450
+63,��🛰🚀🛩✈🚁🚟🚠🚡⛴🛳⛵🚤🛥🚢⚓🪝⛵🛶🚣🏊🏄🪂🪁🎣⛳🏌🏇🧘🤸🤼🤽🤾🤺🏆🏅🥇🥈�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:26.762728
+64,þÿ A L T A / B A J A,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:29.865566
+65,ISO-2022-JP corrupto ALTA/BAJA,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:32.588705
+66, A L T AALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:35.282685
+67,ALTA/BAJAýþÿ,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:38.437674
+68,Content-Transfer-Encoding: base64 QUxUQS9CQUpB===,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:41.490443
+69,QUxUQS9CQUpB  ,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:44.676573
+70,Content-Transfer-Encoding: quoted-printable ALTA/BAJA=Z,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:48.641250
+71,��🐱🐭🐹🐰🦊🐻🐼󰴜🐨🐯🦁🐮🐷🐽🐸🐵🙈🙉🙊🐒🦍🦧🐔🐧🐦🐤 🐣🐥🦆🦅🦉🦇🐺�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:51.422983
+72,Content-Transfer-Encoding: quoted-printable AL=GTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:34:54.382602
+73,<html><head><title>Test</head><body><p>ALTA/BAJA<div><span><b >Test</p></span></div></b></body>,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:34:57.199638
+74,<html><body><p>ALTA/BAJA</p><script>while(true){alert('infinite loop');}</script></body></html>,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:00.133423
+75,<p><div><span>ALTA/BAJA</div></span></p>,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:03.198450
+76,<h1><h2><h3>ALTA/BAJA</h1></h2></h3>,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:06.172966
+77,�🌎🌏🌐🗺🗾🧭🏔⛰🌋🗻🏕🏖🏜🏝🏞🏟🏛🏗🧱🪨🪵🛖🏘🏚🏠🏡🏢🏣🏤🏥🏦🏨🏩🏪🏫🏬🏭🏯�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:09.026871
+78,<select><option>ALTA/BAJA</select></option>,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:11.907448
+79,&#x41;&#x4C;&#x54;&#x41;/&#x42;&#x41;&#x4A;&#x41;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:15.124075
+80,&#65;&#76;&#84;&#65;/&#66;&#65;&#74;&#65;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:18.412935
+81,&unknownentity; ALTA/BAJA &anotherbad;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:21.217109
+82,&#0; ALTA/BAJA &#1;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:24.431266
+83,&gt;&lt;&amp;&quot;&apos; ALTA/BAJA &apos;&quot;&amp;&lt;&gt;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:27.708090
+84,<!DOCTYPE html [<!ENTITY custom ALTA/BAJA>]> &custom;,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:30.826930
+85,body::before { content: 'FAKE'; position: absolute; },NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:34.132041
+86,Este es un email de prueba categoría: Correo SVG embedido Contiene la palabra clave ALTA/BAJA para testing. Referencia única: 401 Más contenido de relleno para pruebas Correo SVG embedido. http://example.com/401/alta-baja,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:36.882937
+87,�� Estado: ALTA/BAJA �� Usuario: #428 �� Prueba de resiliencia ✅,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:41.192163
+88,��⚡✨💥➡ ALTA/BAJA ⬅💥✨⚡�,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:44.475888
+89,Operacioˊn ALTA/BAJA#445 	ext{Operación } \mathrm{ALTA/BAJA} \quad \#445Operacioˊn ALTA/BAJA,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:47.268420
+90,<root> <![CDATA[Texto literal ALTA/BAJA #448]]> </root>,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:50.246822
+91,#!/bin/sh echo ALTA/BAJA #449 >/dev/null,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:53.206942
+92,ES: ALTA/BAJA EN: TOGGLE AR: لﯾدﺑﺗ ZH: 切换 ID: 450,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:35:56.593981
+93,<ul> <li>Acción: ALTA/BAJA</li> <li>ID: 451</li> <li>Nota: prueba de listas</li> </ul>,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:35:59.558212
+94,⭐🌟💫⚡☄💥🔥🌪🌈☀🌤⛅🌦🌧⛈🌩🌨❄☃⛄🌬💨💧💦☔☂🌊 �,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:02.691479
+95,op=ALTA/BAJA&id=452&token=abc123&ts=1734567890,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:36:05.951185
+96,"#include <stdio.h> int main(){ printf(ALTA/BAJA %d , 453); return 0; } ",NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:09.143995
+97,<rss> <channel> <title>ALTA/BAJA feed</title> <item><title>ID 456</title></item> </channel> </rss>,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:12.462220
+98,| id  | acción    | |-----|-----------| | 457 | ALTA/BAJA |,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:36:15.848503
+99,NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE NO CLASIFICABLE NO CLASIFICABLE  NO CLASIFICABLE,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:19.011802
+100,<iframe src=https://example.com/468></iframe>,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:22.974477
+101,01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 01000010 01000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 0100001001000001 01001100 01010100 01000001 00101111 01000010,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:25.843264
+102,��🎯🎮 ALTA/BAJA ��🎯�,NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:36:28.623023
+103,"print(ALTA/BAJA, 473)",NO CLASIFICABLE,ALTA/BAJA,False,2025-08-20T12:36:33.048134
+104,�🎪🎨🎬🎤🎧🎼🎵🎶🎹🥁🎷🎺🎸🪕🎻 ALTA/BAJA,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:35.781790
+105,Please confirm �� http://example.com/485,NO CLASIFICABLE,NO CLASIFICABLE,True,2025-08-20T12:36:38.643452
+106,Alta de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:36:42.227978
+107,Alta de usuario RETACEO,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:36:45.403635
+108,Baja de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:36:48.883472
+109,Baja de usuario RETACEO,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:36:52.097983
+110,Cambio de contraseña,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:36:55.026736
+111,Desbloque de contraseña,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:36:58.751709
+112,Desbloqueo de contraseña Tiendas Franquicias,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:01.516750
+113,Creación de nuevos usuarios,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:04.954617
+114,"Crear, eliminar y administrar cuentas de usuaios",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:08.433279
+115,"Altas, bajas y cambios usuarios Active Directory",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:12.873216
+116,"Altas, bajas y cambios usuarios red inalámbrica",ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:37:18.419741
+117,"Altas, bajas y cambios usuarios VPN C2S",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:21.679694
+118,Dar de alta credenciales de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:25.752264
+119,Dar de baja credenciales de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:28.790706
+120,"Asignación, designación de roles",ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:37:31.541394
+121,Asignar susbcripción a usuarios,ALTA/BAJAL,ALTA/BAJA,False,2025-08-20T12:37:36.702393
+122,Incremento de tamaño de Buzón,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:37:39.920162
+123,Creación de tenant y/o subscripción,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:37:42.840648
+124,Crear de cuentas de usuario en Azure Active Directory,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:45.909193
+125,Activación del MFA,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:49.123898
+126,Asignación de acceso a carpeta compartida (lectura/escritura),ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:52.165950
+127,Creeación y modificación de usuario,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:37:56.603945
+128,Retiro de licencia,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:37:59.717487
+129,Configuración de permisos en archivos y directorios,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:03.023816
+130,Habilitación/Deshabilitación de políticas de seguridad para roles/usuarios,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:06.221759
+131,Reseteo de claves de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:10.800449
+132,"Crear, modificar, eliminar usuarios no predeterminados",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:14.277722
+133,"Crear, modificar, roles/usuarios/equipos en VCenter",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:17.765487
+134,Creación de usuarios,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:20.828589
+135,Perdida de acceso a Tenant Azure,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:24.001816
+136,Perdida de acceso a Tenant Google,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:27.393336
+137,Problemas de acceso al Tenant,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:30.467367
+138,Problemas de rendimiento en servicios,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:33.738723
+139,Configuración de reglas de acceso a recursos del Tenant,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:37.862571
+140,Creación Usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:40.902923
+141,Modificación Usuario,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:46.069955
+142,Baja de Usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:49.408548
+143,Creación/modificación usuarios (solo lectura),ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:52.721443
+144,Modificación de usuario,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:38:56.978525
+145,Alta/baja/cambios usuarios de base de datos (ABC),ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:38:59.858974
+146,Actualización de Datos,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:39:05.671162
+147,"Crear, eliminar, modificar listas Blancas/Negras",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:09.058241
+148,Eliminación de usuarios,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:12.175490
+149,Desbloqueo de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:16.371820
+150,Deshabilitación/Eliminación de ambientes,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:19.820025
+151,Eliminación de ambientes,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:25.116841
+152,Crear listas Blancas/Negras,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:39:28.109545
+153,Dar de alta a el nuevo usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:30.813326
+154,"Por favor, solicitar creación de nuevos usuarios en plataforma",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:33.761438
+155,Solicito creación de usuario con los accesos correspondientes,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:36.616614
+156,Por favor dar de baja el usuario por cese laboral,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:39.467643
+157,Requiero modificar permisos de usuario existente en el sistema.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:42.239425
+158,Favor de habilitar acceso a red inalámbrica para nuevo colaborador,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:46.996678
+159,Se necesita alta de usuario en el sistema de correo electrónico.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:49.758374
+160,Solicitud de baja de credenciales de ex colaborador.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:52.827154
+161,Asignar permisos de lectura/escritura en carpeta compartida,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:55.850630
+162,Alta de usuario en plataforma de nómina.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:39:59.856548
+163,Baja de usuario en Active Directory,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:03.075120
+164,Crear usuario en SAP para nuevo ingreso.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:06.032839
+165,Eliminar usuario inactivo en VPN.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:10.500982
+166,Reactivar cuenta de usuario bloqueada,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:14.477371
+167,Alta de credenciales en sistema de reportes,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:17.777710
+168,Dar de baja usuario que ya no pertenece a la organización.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:20.781620
+169,Solicitud de modificación de roles de usuario,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:24.993355
+170,Alta de acceso temporal para proyecto específico,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:28.772434
+171,Baja de accesos temporales ya concluidos.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:32.056735
+172,Solicitud de desbloqueo de usuario por intentos fallidos.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:35.145856
+173,Asignar nueva licencia a usuario activo,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:39.316698
+174,Retirar licencia por baja de colaborador,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:43.777359
+175,Alta de usuario en Google Workspace.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:48.531428
+176,Baja de usuario en Microsoft 365.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:51.329286
+177,Crear cuenta en base de datos para nuevo analista.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:54.637864
+178,Eliminar cuenta de base de datos por baja de personal.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:40:58.024780
+179,Reasignación de permisos en carpetas compartidas,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:41:01.402525
+180,Habilitar MFA en cuenta de usuario recién creado.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:04.377012
+181,Deshabilitar MFA en cuenta de usuario dado de baja.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:08.264229
+182,Alta de usuario en plataforma de tickets.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:12.245659
+183,Baja de usuario en sistema de soporte.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:18.840525
+184,Solicitud de acceso a directorio compartido.,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:41:22.488853
+185,Eliminación de accesos de usuario desvinculado.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:26.533991
+186,Favor de crear un nuevo usuario con acceso al sistema de inventarios para el área de logística.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:29.490837
+187,Solicito la baja inmediata del usuario debido a la desvinculación laboral del colaborador.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:33.279852
+188,Se requiere habilitar un usuario en la red inalámbrica con permisos de conexión total,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:36.199290
+189,"Por favor, dar de alta un usuario en la plataforma de reportes financieros con rol de lectura.",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:39.227113
+190,Solicito modificar el perfil de usuario existente para que tenga permisos de administrador,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:42.980208
+191,Requiero la eliminación de accesos a carpetas compartidas de un usuario que ya no pertenece al área,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:46.241093
+192,"Por favor, asignar licencia de Microsoft 365 al nuevo colaborador del departamento de compras.",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:49.843948
+193,Dar de baja los accesos a VPN de un usuario inactivo.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:54.545872
+194,Se solicita crear cuenta de correo corporativo para nuevo ingreso en el área de recursos humanos,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:41:57.718659
+195,"Por favor, deshabilitar usuario en Active Directory por finalización de contrato",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:00.590151
+196,Requiero alta de usuario en la plataforma de nómina con permisos de consulta y carga de información,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:03.470937
+197,Solicito baja de credenciales en SAP para colaborador desvinculado,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:11.069690
+198,Favor de asignar permisos de escritura en carpeta de proyectos al usuario recién incorporado,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:16.040447
+199,Dar de alta cuenta de usuario en el sistema de soporte técnico para nuevo integrante del equipo,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:19.793543
+200,Se solicita baja de usuario en la base de datos por conclusión de sus actividades,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:25.022062
+201,Requiero modificación de credenciales de usuario por cambio de puesto en la organización,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:29.294197
+202,Favor desbloquear cuenta de usuario que excedió intentos fallidos de acceso,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:32.371890
+203,Dar de alta usuario en plataforma de capacitación en línea con rol de estudiante,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:35.911331
+204,Se solicita eliminación de accesos temporales asignados a personal externo,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:39.330209
+205,"Por favor, habilitar Multi-Factor Authentication en la cuenta del nuevo usuario creado",ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:42.177387
+206,Solicito baja de usuario en Google Workspace por desvinculación del colaborador,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:45.167123
+207,Crear usuario en Azure Active,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:51.406524
+208,eliminar usuario en Azure Active Directory con permisos,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:54.698630
+209,Activar permisos limitados para pruebas en ambiente de desarrollo.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:42:58.492403
+210,Modificar usuario.,ALTA/BAJA,NO CLASIFICABLE,False,2025-08-20T12:43:01.555050
+211,Modificar usuario en Azure Active Directory con permisos limitados para pruebas en ambiente de desarrollo.,ALTA/BAJA,ALTA/BAJA,True,2025-08-20T12:43:04.502953
